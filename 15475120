@@ -1,0 +1,22 @@
+#!/bin/sh
+awk -v x1=$1 -v x2=$2 '
+BEGIN {
+	if (x1 > x2) {
+		a = x1;
+		b = x2;
+	} else {
+		a = x2;
+		b = x1;
+	}
+}
+function getGCM(x, y) {
+	r = x % y;
+	if (r == 0) {
+		return y;
+	} else {
+		return getGCM(y, r);
+	}
+}
+END {
+	print getGCM(a, b)
+}' /dev/null
